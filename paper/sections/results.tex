@@ -68,7 +68,7 @@ Table~\ref{tab:theta_fixed} compares free-$\theta$ and fixed-$\theta$ Cohen's $d
 The benefit of fixed-$\theta$ is modulated by baseline $\ell_z^*$ level rather than $\theta$-shift magnitude.
 Qwen (67.8\% accuracy, $\Delta\theta{=}0.47$, baseline $\ell_z^*{=}{+}8.68$) shows 2.4$\times$ amplification at 50\%: its large baseline departure from the IRT null provides substantial signal that free-$\theta$ absorption erodes, which $\theta$-anchoring recovers (multi-seed mean ${\ell_z^*}_{\text{fixed}} {=} 14.5$ vs.\ clean $7.35$).
 Mistral (52.4\%, baseline $\ell_z^*{=}{+}4.02$) shows 1.7$\times$ at 50\%.
-Llama (59.4\%, $\Delta\theta{=}0.39$ at 15\%, $0.52$ at 50\%) shows 0.3$\times$ despite comparable $\theta$-shift: its near-zero baseline $\ell_z^*$ ($+0.26$) indicates that the clean response pattern conforms to IRT expectations, leaving no absorbed signal for $\theta$-anchoring to recover.
+Llama (59.4\%, $\Delta\theta{=}0.39$ at 15\%, $0.52$ at 50\%) shows 0.4$\times$ at 50\% despite comparable $\theta$-shift: its near-zero baseline $\ell_z^*$ ($+0.26$) indicates that the clean response pattern conforms to IRT expectations, leaving no absorbed signal for $\theta$-anchoring to recover.
 The amplification ratio tracks baseline $|\ell_z^*|$ monotonically ($8.68 {\to} 2.4{\times}$; $4.02 {\to} 1.7{\times}$; $0.26 {\to} 0.4{\times}$ at 50\%), making fixed-$\theta$ a targeted remedy for models with substantial baseline misfit, not a universal one.
 
 \begin{table}[t]
