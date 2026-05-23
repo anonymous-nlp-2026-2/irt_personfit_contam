@@ -11,7 +11,7 @@ On MMLU, effect sizes range from $|d|{=}1.99$ (Llama at 25\%) to $|d|{=}7.44$ (Q
 On ARC-C (295 items), Qwen yields $|d|{=}3.16$ at 15\% and $|d|{=}5.30$ at 50\%, demonstrating that detection remains feasible even on small benchmarks when contamination is sufficiently concentrated.
 
 Clean-model $\ell_z^*$ baselines diverge substantially across families: Qwen ${+}8.68$ ($\text{SD}{=}0.74$), Mistral ${+}4.02$ ($\text{SD}{=}2.05$), Llama ${+}0.26$ ($\text{SD}{=}1.54$), and ARC-C Qwen ${-}5.42$ ($\text{SD}{=}0.16$).
-Absolute $\ell_z^*$ thresholds would produce contradictory results: Qwen's contaminated $\ell_z^*$ at 15\% (${+}3.85$) is still positive.
+Absolute $\ell_z^*$ thresholds would produce contradictory results: Qwen's contaminated $\ell_z^*$ at 15\% (${+}3.8$) is still positive.
 The $\Delta\ell_z^*$ design normalizes these divergent baselines: Cohen's $d$ yields comparable effect sizes ($|d|{=}1.99$--$7.44$) despite order-of-magnitude differences.
 Figure~\ref{fig:heatmap} provides a visual summary.
 
@@ -55,8 +55,8 @@ $\theta$-shift absorption is the dominant source of detection variability for hi
 (iii) the cross-model ranking under free-$\theta$ is seed-dependent at 50\%, making $\theta$-anchoring a necessary condition for reliable detection of high-ability models at high contamination.
 
 ARC-C reverses this pattern.
-Despite Qwen's high baseline accuracy on ARC-C (90.0\%), contamination produces larger, not smaller, effect sizes ($|d|{=}3.16$ at 15\%, $|d|{=}5.30$ at 50\%).
-This reversal reflects a ceiling effect: with only 295 items and 90.0\% baseline accuracy, the already-correct items offer minimal room for further $\theta$ inflation, so contamination manifests primarily as anomalous successes on the few remaining hard items.
+Despite Qwen's high baseline accuracy on ARC-C (89.7\%), contamination produces larger, not smaller, effect sizes ($|d|{=}3.16$ at 15\%, $|d|{=}5.30$ at 50\%).
+This reversal reflects a ceiling effect: with only 295 items and 89.7\% baseline accuracy, the already-correct items offer minimal room for further $\theta$ inflation, so contamination manifests primarily as anomalous successes on the few remaining hard items.
 The small item count amplifies this concentration, producing a disproportionately large $\ell_z^*$ shift per contaminated item.
 
 The baseline $\ell_z^*$ for ARC-C is negative ($-5.42$), reflecting the 4PL model's expectation of near-perfect performance; contamination pushes $\ell_z^*$ toward zero, producing the positive Cohen's $d$ values in Table~\ref{tab:cohens_d}.
@@ -122,7 +122,7 @@ Yet the diagnostic power reverses.
 Full IRT parameterization is unnecessary for mere detection, but the value of $\ell_z^*$ lies in three capabilities that HT and $z$-scores lack:
 (a) \emph{seen/unseen decomposition}: $\ell_z^*$ can be computed separately on seen and unseen item subsets, though item-level detection is near-random (AUROC $\approx 0.53$; Appendix~\ref{app:item_auroc}), confirming that the contamination signal is diffuse and requires model-level aggregation;
 (b) \emph{$\theta$-shift mechanism}: the ability parameter exposes why detection sensitivity depends on model ability (\S\ref{sec:theta_dynamics}), a mechanistic insight inaccessible to non-parametric statistics;
-(c) \emph{structural sensitivity}: on real leaderboard data, $\ell_z^*$ flags 57/60 model-benchmark cells as aberrant---evidence of systematic IRT assumption violations that motivates the $\Delta\ell_z^*$ matched-difference design (\S\ref{sec:did}).
+(c) \emph{structural sensitivity}: on real leaderboard data, $\ell_z^*$ flags 57/60 model-benchmark cells as aberrant---evidence of systematic IRT assumption violations that motivates the $\Delta\ell_z^*$ matched-difference design (\S\ref{sec:did}; Appendix~\ref{app:leaderboard_aberrance}).
 Accuracy $z$-scores flag only 4/60 cells, making them insensitive to the response-pattern structure that $\ell_z^*$ exploits for within-model diagnosis.
 While such patterns have theoretical antecedents in person-fit literature \citep{stonge2011}, the specific magnitude and model-dependence we observe are new empirical findings in the LLM domain; nonparametric alternatives \citep{tendeiro2014} may complement $\ell_z^*$ where 4PL calibration is unavailable.
 
