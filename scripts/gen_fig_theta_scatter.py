@@ -32,7 +32,7 @@ data_15 = [
     (67.8, 6.57, 4.54, 15.19, 'Qwen', 'MMLU'),
     (59.4,  2.11, 1.40,  4.80, 'Llama', 'MMLU'),
     (52.4,  3.01, 1.75,  8.18, 'Mistral', 'MMLU'),
-    (89.9,  3.16, 2.01,  9.54, 'Qwen\nARC-C', 'ARC-C'),
+    (89.7,  3.16, 2.01,  9.54, 'Qwen\nARC-C', 'ARC-C'),
 ]
 # 25% contamination
 data_25 = [
@@ -44,7 +44,7 @@ data_50 = [
     (67.8, 1.90, 1.04, 4.95, 'Qwen', 'MMLU'),
     (59.4,  2.33, 1.60, 5.10, 'Llama', 'MMLU'),
     (52.4,  3.50, 2.10, 9.40, 'Mistral', 'MMLU'),
-    (89.9,  5.30, 3.60, 15.20, 'Qwen\nARC-C', 'ARC-C'),
+    (89.7,  5.30, 3.60, 15.20, 'Qwen\nARC-C', 'ARC-C'),
 ]
 
 C_QWEN = '#2166ac'
@@ -105,7 +105,7 @@ ax.annotate('Mistral', xy=(52.4, 3.50), xytext=(46, 4.5),
             arrowprops=dict(arrowstyle='-', color=C_MISTRAL, lw=0.5, alpha=0.4))
 
 # Label Qwen ARC-C
-ax.annotate('Qwen\nARC-C', xy=(89.9, 5.30), xytext=(92, 6.2),
+ax.annotate('Qwen\nARC-C', xy=(89.7, 5.30), xytext=(92, 6.2),
             fontsize=7, color=C_ARCC, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_ARCC, lw=0.5, alpha=0.4))
 
@@ -115,7 +115,7 @@ ax.annotate('θ-shift\nabsorption', xy=(68.4, 1.90), xytext=(75, 1.3),
             arrowprops=dict(arrowstyle='->', color='#888888', lw=0.8))
 
 # Ceiling reversal annotation
-ax.annotate('ceiling\nreversal', xy=(89.9, 6.0), xytext=(93, 7.2),
+ax.annotate('ceiling\nreversal', xy=(89.7, 6.0), xytext=(93, 7.2),
             fontsize=6.5, color='#555555', style='italic',
             arrowprops=dict(arrowstyle='->', color='#888888', lw=0.8))
 
