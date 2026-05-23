@@ -22,6 +22,7 @@ matplotlib.rcParams.update({
 
 models = ['Qwen-2.5-7B', 'Llama-3.1-8B', 'Mistral-7B']
 columns = [
+    ('MMLU\n5%', 'MMLU'),
     ('MMLU\n15%', 'MMLU'),
     ('MMLU\n25%', 'MMLU'),
     ('MMLU\n50%', 'MMLU'),
@@ -30,15 +31,15 @@ columns = [
 ]
 
 d_vals = np.array([
-    [6.58, 8.22, 1.90, 3.16, 5.30],
-    [2.27, 2.97, 2.50, np.nan, np.nan],
-    [3.01, np.nan, 3.50, np.nan, np.nan],
+    [4.15, 6.58, 8.22, 1.90, 3.16, 5.30],
+    [np.nan, 2.11, 1.99, 2.33, np.nan, np.nan],
+    [np.nan, 3.01, np.nan, 3.50, np.nan, np.nan],
 ])
 
 ci_text = [
-    ['[4.5, 15.2]', '[5.7, 18.9]', '[1.0, 5.0]', '[2.0, 9.5]', '[3.6, 15.5]'],
-    ['[1.6, 4.6]', '[2.0, 6.1]', '[1.8, 5.2]', '', ''],
-    ['[1.8, 8.2]', '', '[2.1, 9.4]', '', ''],
+    ['[2.7, 9.9]', '[4.5, 15.2]', '[5.7, 18.9]', '[1.0, 5.0]', '[2.0, 9.5]', '[3.6, 15.5]'],
+    ['', '[1.4, 4.8]', '[1.3, 4.4]', '[1.6, 5.1]', '', ''],
+    ['', '[1.8, 8.2]', '', '[2.1, 9.4]', '', ''],
 ]
 
 n_rows, n_cols = d_vals.shape
@@ -48,7 +49,7 @@ vmax = 9.0
 cmap = plt.cm.Blues
 norm = mcolors.Normalize(vmin=0, vmax=vmax)
 
-fig, ax = plt.subplots(figsize=(7.5, 3.2))
+fig, ax = plt.subplots(figsize=(8.5, 3.2))
 
 im = ax.imshow(d_display, cmap=cmap, norm=norm, aspect='auto')
 
@@ -84,13 +85,13 @@ ax.tick_params(length=0)
 
 # Group labels below column labels (x=data coords, y=axes fraction)
 trans = ax.get_xaxis_transform()
-ax.text(1, -0.18, 'MMLU (14,042 items)', ha='center', va='top',
+ax.text(1.5, -0.18, 'MMLU (14,042 items)', ha='center', va='top',
         fontsize=9, fontweight='bold', transform=trans)
-ax.text(3.5, -0.18, 'ARC-C (295 items)', ha='center', va='top',
+ax.text(4.5, -0.18, 'ARC-C (295 items)', ha='center', va='top',
         fontsize=9, fontweight='bold', transform=trans)
 
 # Separator between MMLU and ARC-C
-ax.axvline(x=2.5, color='white', linewidth=3)
+ax.axvline(x=3.5, color='white', linewidth=3)
 
 # Colorbar
 cbar = fig.colorbar(im, ax=ax, shrink=0.8, pad=0.02)

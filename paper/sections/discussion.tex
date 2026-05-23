@@ -1,0 +1,21 @@
+\section{Discussion}\label{sec:discussion}
+
+Our findings reveal both the strengths and boundaries of IRT person-fit for contamination detection: $\ell_z^*$ reliably detects SFT-stage contamination across model families, but three boundary conditions constrain its practical utility.
+
+\paragraph{Characterization over tool.}
+The detection-diagnosis tradeoff (\S\ref{sec:degradation}) shows that simpler statistics detect contamination more powerfully than $\ell_z^*$: accuracy $z$-scores yield $|d|$ values several-fold to over an order of magnitude larger, and HT generally exceeds $\ell_z^*$.
+The value of the IRT framework lies not in detection power but in mechanistic understanding: the $\theta$-shift analysis reveals \emph{why} detection sensitivity varies across models and contamination levels, the seen/unseen decomposition identifies \emph{what fraction} of items are memorized, and the 4PL parameterization captures item-level ceiling effects that 3PL misattributes as aberrance.
+These diagnostic capabilities are invisible to accuracy $z$-scores or HT.
+Findings~1--2 are theoretically predictable from IRT principles; our contribution lies in quantifying these effects in the LLM setting, where the magnitude and boundary conditions are not derivable from theory alone.
+
+\paragraph{Practical implications.}
+Two results have immediate consequences.
+Free-$\theta$ estimation produces seed-dependent dose-response curves (CV up to 60\%); anchoring $\theta$ to a pre-contamination baseline stabilizes detection and amplifies the signal for models whose clean $\ell_z^*$ departs substantially from zero.
+The benchmark size boundary means $\ell_z^*$ is most informative for large benchmarks ($n > 7{,}000$ items for 80\% power at 15\% contamination); on small benchmarks like ARC-C (295 items), detection relies on concentrated contamination effects.
+
+\paragraph{Scope and calibration.}
+Universal baseline misfit (57/60 cells flagged) confirms systematic IRT violations; the $\Delta\ell_z^*$ design turns this into a feature through within-model differencing.
+PSN-IRT provides pre-calibrated 4PL parameters \citep{psnirt2026}, but classical calibration fails on contaminated data ($r_a{=}0.127$; Appendix~\ref{app:mml_em}); the calibration sample (13,000+ models) may itself include contaminated ones, though individual contamination effects are diluted across models.
+The robustness analysis (Appendix~\ref{app:param_perturb}) provides partial reassurance (${\pm}10\%$ noise tolerance).
+\paragraph{Information requirements and method positioning.}
+$\ell_z^*$ sits below MIA \citep[logits;][]{minkprob2024} and ConStat \citep[multi-benchmark scores;][]{constat2024} in an information-requirements hierarchy, needing only single-benchmark binary patterns and an external item bank---suited to retrospective audits where logits are unavailable. Our GRPO pilot directly confirms this advantage: Min-K\% AUC degrades from $0.611$ (SFT) to $0.493$ (post-RL), indistinguishable from chance, while $\ell_z^*$ signal persists (${\sim}3.3$; Figure~\ref{fig:grpo}), demonstrating that response-pattern anomalies survive RL alignment that eliminates memorization-based features \citep{wang2025fragility}.

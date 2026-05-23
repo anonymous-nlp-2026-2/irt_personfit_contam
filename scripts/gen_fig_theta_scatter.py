@@ -23,24 +23,28 @@ matplotlib.rcParams.update({
 })
 
 # Data: (baseline_acc%, |d|, ci_lo, ci_hi, model_label, benchmark)
+# 5% contamination
+data_5 = [
+    (67.8, 4.15, 2.74, 9.85, 'Qwen', 'MMLU'),
+]
 # 15% contamination
 data_15 = [
-    (67.87, 6.58, 4.54, 15.19, 'Qwen', 'MMLU'),
-    (60.0,  2.27, 1.56,  4.63, 'Llama', 'MMLU'),
-    (53.4,  3.01, 1.75,  8.18, 'Mistral', 'MMLU'),
-    (90.2,  3.16, 2.01,  9.54, 'Qwen\nARC-C', 'ARC-C'),
+    (67.8, 6.58, 4.54, 15.19, 'Qwen', 'MMLU'),
+    (59.4,  2.11, 1.40,  4.80, 'Llama', 'MMLU'),
+    (52.4,  3.01, 1.75,  8.18, 'Mistral', 'MMLU'),
+    (89.9,  3.16, 2.01,  9.54, 'Qwen\nARC-C', 'ARC-C'),
 ]
 # 25% contamination
 data_25 = [
-    (67.87, 8.22, 5.73, 18.88, 'Qwen', 'MMLU'),
-    (60.0,  2.97, 2.03,  6.06, 'Llama', 'MMLU'),
+    (67.8, 8.22, 5.73, 18.88, 'Qwen', 'MMLU'),
+    (59.4,  1.99, 1.30,  4.40, 'Llama', 'MMLU'),
 ]
 # 50% contamination
 data_50 = [
-    (67.87, 1.90, 1.04, 4.95, 'Qwen', 'MMLU'),
-    (60.0,  2.50, 1.76, 5.19, 'Llama', 'MMLU'),
-    (53.4,  3.50, 2.09, 9.59, 'Mistral', 'MMLU'),
-    (90.2,  5.30, 3.64, 15.49, 'Qwen\nARC-C', 'ARC-C'),
+    (67.8, 1.90, 1.04, 4.95, 'Qwen', 'MMLU'),
+    (59.4,  2.33, 1.60, 5.10, 'Llama', 'MMLU'),
+    (52.4,  3.50, 2.09, 9.59, 'Mistral', 'MMLU'),
+    (89.9,  5.30, 3.64, 15.49, 'Qwen\nARC-C', 'ARC-C'),
 ]
 
 C_QWEN = '#2166ac'
@@ -66,11 +70,13 @@ def plot_points(data, marker, size, label_suffix, zorder=5):
                 linewidth=1.2, alpha=0.5, zorder=zorder - 1)
 
 # Plot each contamination level with different markers
+plot_points(data_5,  'D', 50, '5%',  zorder=6)
 plot_points(data_15, '^', 60, '15%', zorder=6)
 plot_points(data_25, 's', 55, '25%', zorder=7)
 plot_points(data_50, 'o', 60, '50%', zorder=6)
 
 # Legend entries (manual)
+ax.scatter([], [], marker='D', s=40, color='gray', label='5% contam.')
 ax.scatter([], [], marker='^', s=50, color='gray', label='15% contam.')
 ax.scatter([], [], marker='s', s=45, color='gray', label='25% contam.')
 ax.scatter([], [], marker='o', s=50, color='gray', label='50% contam.')
@@ -84,32 +90,32 @@ offsets = {
 }
 
 # Label Qwen (blue cluster)
-ax.annotate('Qwen', xy=(67.87, 8.22), xytext=(72, 8.5),
+ax.annotate('Qwen', xy=(67.8, 8.22), xytext=(72, 8.5),
             fontsize=8, color=C_QWEN, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_QWEN, lw=0.5, alpha=0.4))
 
 # Label Llama
-ax.annotate('Llama', xy=(60, 2.50), xytext=(62, 3.8),
+ax.annotate('Llama', xy=(59.4, 2.33), xytext=(61.5, 3.8),
             fontsize=8, color=C_LLAMA, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_LLAMA, lw=0.5, alpha=0.4))
 
 # Label Mistral
-ax.annotate('Mistral', xy=(53.4, 3.50), xytext=(47, 4.5),
+ax.annotate('Mistral', xy=(52.4, 3.50), xytext=(46, 4.5),
             fontsize=8, color=C_MISTRAL, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_MISTRAL, lw=0.5, alpha=0.4))
 
 # Label Qwen ARC-C
-ax.annotate('Qwen\nARC-C', xy=(90.2, 5.30), xytext=(92, 6.2),
+ax.annotate('Qwen\nARC-C', xy=(89.9, 5.30), xytext=(92, 6.2),
             fontsize=7, color=C_ARCC, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_ARCC, lw=0.5, alpha=0.4))
 
 # θ-shift absorption annotation (arrow from Qwen 25% down to 50%)
-ax.annotate('θ-shift\nabsorption', xy=(68.5, 1.90), xytext=(75, 1.3),
+ax.annotate('θ-shift\nabsorption', xy=(68.4, 1.90), xytext=(75, 1.3),
             fontsize=6.5, color='#555555', style='italic',
             arrowprops=dict(arrowstyle='->', color='#888888', lw=0.8))
 
 # Ceiling reversal annotation
-ax.annotate('ceiling\nreversal', xy=(90.2, 6.0), xytext=(93, 7.2),
+ax.annotate('ceiling\nreversal', xy=(89.9, 6.0), xytext=(93, 7.2),
             fontsize=6.5, color='#555555', style='italic',
             arrowprops=dict(arrowstyle='->', color='#888888', lw=0.8))
 
