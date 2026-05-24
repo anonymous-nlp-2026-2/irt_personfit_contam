@@ -88,7 +88,7 @@ Qwen & 4.15 & 3.52 & 0.8$\times$ & [2.9, 5.7] \\
 \multicolumn{5}{@{}l}{\textit{15\% contamination}} \\
 Qwen$^{\S}$ & 5.36 & 6.85 & 1.3$\times$ & ($\pm$1.80) \\
 Llama & 2.11 & 0.58 & 0.3$\times$ & [0, 2.37]$^{\dagger}$ \\
-Mistral$^{\ddagger}$ & 3.37 & 2.69 & 0.8$\times$ & [1.53, 9.06] \\
+Mistral$^{\ddagger}$ & 2.64 & 2.69 & 1.0$\times$ & [1.53, 9.06] \\
 \addlinespace
 \multicolumn{5}{@{}l}{\textit{50\% contamination}} \\
 Qwen$^{\S}$ & 5.08 & 12.32 & 2.4$\times$ & ($\pm$2.38) \\
@@ -97,7 +97,8 @@ Mistral$^{\ddagger}$ & 3.50 & 5.80 & 1.7$\times$ & [3.87, 18.45] \\
 \bottomrule
 \multicolumn{5}{@{}l}{\scriptsize $^{\dagger}$CI includes zero.} \\
 \multicolumn{5}{@{}l}{\scriptsize $^{\S}$Multi-seed mean ($n{=}3$); CI column shows $\pm$SD of fixed-$\theta$ $|d|$.} \\
-\multicolumn{5}{@{}l}{\scriptsize $^{\ddagger}$Fixed-$\theta$: 6 seeds (4 response vectors from seeds 4--7 not retained in pipeline); free-$\theta$ uses all 10.}
+\multicolumn{5}{@{}l}{\scriptsize $^{\ddagger}$Fixed-$\theta$: 6 seeds (4 response vectors from seeds 4--7 not retained in pipeline); free-$\theta$ uses all 10.} \\
+\multicolumn{5}{@{}p{0.9\columnwidth}}{\scriptsize $d_{\text{free}}$ values for single-seed conditions are from seed 42; multi-seed means are reported in Table~\ref{tab:cohens_d}.}
 \end{tabular}}
 \end{table}
 
@@ -164,5 +165,6 @@ The multi-seed mean trajectory ($|d|$: $4.15 \to 5.36 \to 7.44 \to 5.08$ at 5\%/
 This non-monotonicity is a $\theta$-estimation artifact: fixed-$\theta$ analysis eliminates the inverted-U and reveals a strong positive dose-response (mean $|d|$: $5.89$ at 25\% vs.\ $12.32$ at 50\%, no seed-level overlap), while reducing the 50\% CV to 19\%.
 Llama shows an approximately flat dose-response ($|d|{=}2.80 \to 2.56 \to 2.30$), consistent with its near-zero $\ell_z^*$ baseline ($+0.26$ vs.\ ${+}8.68$ for Qwen) despite comparable $\theta$-shift ($\Delta\theta{=}0.52$ vs.\ $0.47$).
 The mechanism is predictable from simulation (Appendix~\ref{app:simulation}): at moderate contamination, aberrant responses dominate; at high contamination, inflated $\hat{\theta}$ absorbs the anomaly---but the magnitude is highly seed-dependent.
+Three regimes are visible in Qwen's free-$\theta$ trajectory: at 5\%, $\theta$-shift is negligible and $\ell_z^*$ captures the full misfit; through 15--25\%, pattern deviations outpace $\theta$-shift absorption, yielding peak signal; at 50\%, $\Delta\theta{=}0.47$ absorbs enough aberrance that $|d|$ declines despite double the contamination fraction.
 
 A simulated power analysis corroborates these findings: two-sided testing (flagging both large negative and large positive $\ell_z^*$) achieves ${>}$93\% power on MMLU at all contamination levels, with the theoretical power function yielding $R^2 {=} 0.957$ against simulated values (Appendix~\ref{app:simulation}).
