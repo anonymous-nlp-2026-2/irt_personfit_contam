@@ -2,5 +2,5 @@
 
 We characterized IRT person-fit statistics for LLM contamination detection across three 7--8B model families, establishing reliable SFT-stage detection while identifying boundary conditions: $\theta$-shift absorption necessitating $\theta$-anchored estimation for high-ability models, a detection-diagnosis tradeoff, and non-monotonic dose-response as a $\theta$-estimation artifact.
 For practitioners, we recommend a two-stage workflow: accuracy $z$-scores for efficient screening, followed by $\ell_z^*$ analysis when mechanistic understanding is needed---distinguishing \emph{which} items drive aberrance rather than merely flagging contamination.
-Beyond detection, our characterization reveals that person-fit statistics capture structural response-pattern anomalies that persist even after RL post-training erases memorization-based signals, suggesting a complementary role to logit-based methods in the evaluation integrity toolkit.
+Beyond detection, person-fit statistics capture response-pattern anomalies that persist after RL post-training erases memorization-based signals, complementing logit-based methods.
 Future work should address pretraining-stage signatures, broader model scales, and cross-benchmark generalization with larger item banks.

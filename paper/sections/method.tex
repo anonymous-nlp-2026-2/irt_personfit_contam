@@ -46,6 +46,7 @@ We validate on three 7--8B model families: Qwen2.5-7B-Instruct, Llama-3.1-8B-Ins
 Each is fine-tuned with QLoRA (rank\,$=$\,16, $\alpha$\,$=$\,32; full hyperparameters in Appendix~\ref{app:hyperparams}) under clean and contaminated conditions at varying levels: at $X\%$ contamination, $X\%$ of SFT training examples are benchmark items (questions paired with gold answers in the standard evaluation format), with the remainder drawn from a general instruction-following dataset.
 All three families are tested at 15\% and 50\% contamination.
 Following initial observation of non-monotonic dose-response for Qwen, we added 5\% and 25\% conditions for Qwen to trace the full dose-response curve.
+Contamination subsets are nested (5\% $\subset$ 15\% $\subset$ 25\% $\subset$ 50\%) using a fixed item-selection seed; a robustness check with an alternative seed confirms consistent $\ell_z^*$ values (Appendix~\ref{app:reproducibility}).
 The 25\% condition was subsequently extended to Llama to test whether the pattern generalizes; Mistral was not tested at 5\% or 25\% due to computational constraints.
 We train $n{=}10$ independent clean seeds per model to establish baseline variability and construct bootstrap confidence intervals.
 Reported CIs reflect variability across $n$ clean baseline seeds; for Qwen, each contamination level (15\%/25\%/50\%) was additionally replicated with $n{=}3$ independent QLoRA seeds to assess training-run variance (Appendix~\ref{app:reproducibility}).
