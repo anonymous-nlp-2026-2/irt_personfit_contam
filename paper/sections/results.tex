@@ -7,10 +7,10 @@
 Table~\ref{tab:cohens_d} presents Cohen's $d$ effect sizes for $\ell_z^*$ across three model families and two benchmarks.
 All confidence intervals exclude zero, confirming that $\Delta\ell_z^*$ reliably separates contaminated from clean models at both contamination levels.
 
-On MMLU, effect sizes range from $|d|{=}1.99$ (Llama at 25\%) to $|d|{=}7.44$ (Qwen at 25\%), with Qwen at 5\% ($|d|{=}4.15$) confirming detection at the lowest contamination level tested. Llama ($|d|{=}2.11$/$1.99$/$2.33$) and Mistral ($|d|{=}3.01$/$3.50$) show comparable magnitudes.
+On MMLU, effect sizes range from $|d|{=}1.99$ (Llama at 25\%) to $|d|{=}7.44$ (Qwen at 25\%), with Qwen at 5\% ($|d|{=}4.15$) confirming detection at the lowest contamination level tested. Llama ($|d|{=}2.11$/$1.99$/$2.33$) and Mistral ($|d|{=}2.64$/$3.50$) show comparable magnitudes.
 On ARC-C (295 items), Qwen yields $|d|{=}3.16$ at 15\% and $|d|{=}5.30$ at 50\%, demonstrating that detection remains feasible even on small benchmarks when contamination is sufficiently concentrated.
 
-Clean-model $\ell_z^*$ baselines diverge substantially across families: Qwen ${+}8.68$ ($\text{SD}{=}0.74$), Mistral ${+}4.02$ ($\text{SD}{=}2.05$), Llama ${+}0.26$ ($\text{SD}{=}1.54$), and ARC-C Qwen ${-}5.42$ ($\text{SD}{=}0.16$).
+Clean-model $\ell_z^*$ baselines diverge substantially across families: Qwen ${+}8.68$ ($\text{SD}{=}0.74$), Mistral ${+}4.02$ ($\text{SD}{=}2.05$), Llama ${+}0.26$ ($\text{SD}{=}1.54$), and ARC-C Qwen ${-}5.42$ ($\text{SD}{=}0.16$); this divergence reflects difficulty-ordering consistency rather than accuracy level (Appendix~\ref{app:baseline_meaning}).
 Absolute $\ell_z^*$ thresholds would produce contradictory results: Qwen's contaminated $\ell_z^*$ at 15\% (${+}3.8$) is still positive.
 The $\Delta\ell_z^*$ design normalizes these divergent baselines: Cohen's $d$ yields comparable effect sizes ($|d|{=}1.99$--$7.44$) despite order-of-magnitude differences.
 Figure~\ref{fig:heatmap} provides a visual summary.
@@ -27,7 +27,7 @@ Model & Bench. & $d$ (5\%) [CI] & $d$ (15\%) [CI] & $d$ (25\%) [CI] & $d$ (50\%)
 \midrule
 Qwen$^{\dagger}$ & MMLU & $-4.15$ [$-9.9$, $-2.7$] & $-5.36$ ($\pm$1.10) & $-7.44$ ($\pm$1.86) & $-5.08$ ($\pm$3.02) \\
 Llama & MMLU & --- & $-2.11$ [$-4.8$, $-1.4$] & $-1.99$ [$-4.4$, $-1.3$] & $-2.33$ [$-5.1$, $-1.6$] \\
-Mistral & MMLU & --- & $-3.01$ [$-8.2$, $-1.8$] & --- & $-3.50$ [$-9.4$, $-2.1$] \\
+Mistral & MMLU & --- & $-2.64$ [$-7.3$, $-1.5$] & --- & $-3.50$ [$-9.4$, $-2.1$] \\
 Qwen$^{\dagger}$ & ARC-C & --- & $+3.16$ [$2.0$, $9.5$] & --- & $+5.30$ [$3.6$, $15.2$] \\
 \bottomrule
 \multicolumn{6}{@{}l}{\scriptsize $^{\dagger}$15\%/25\%/50\%: multi-seed means ($n{=}3$ QLoRA runs); 5\%: single seed. Per-seed values in Appendix~\ref{app:reproducibility}.}
@@ -88,7 +88,7 @@ Qwen & 4.15 & 3.52 & 0.8$\times$ & [2.9, 5.7] \\
 \multicolumn{5}{@{}l}{\textit{15\% contamination}} \\
 Qwen$^{\S}$ & 5.36 & 6.85 & 1.3$\times$ & ($\pm$1.80) \\
 Llama & 2.11 & 0.58 & 0.3$\times$ & [0, 2.37]$^{\dagger}$ \\
-Mistral$^{\ddagger}$ & 3.01 & 2.69 & 0.9$\times$ & [1.53, 9.06] \\
+Mistral$^{\ddagger}$ & 2.64 & 2.69 & 1.0$\times$ & [1.53, 9.06] \\
 \addlinespace
 \multicolumn{5}{@{}l}{\textit{50\% contamination}} \\
 Qwen$^{\S}$ & 5.08 & 12.32 & 2.4$\times$ & ($\pm$2.38) \\
@@ -148,7 +148,7 @@ Llama & $\ell_z^*$ & $2.11$ [$1.4$, $4.8$] & $2.33$ [$1.6$, $5.1$] \\
       & HT & $2.45$ [$1.5$, $4.3$] & $3.07$ [$1.9$, $5.3$] \\
       & Acc.\ $z$ & $22.5$ [$13.6$, $47.0$] & $32.8$ [$19.8$, $68.6$] \\
 \addlinespace
-Mistral & $\ell_z^*$ & $3.01$ [$1.8$, $8.2$] & $3.50$ [$2.1$, $9.4$] \\
+Mistral & $\ell_z^*$ & $2.64$ [$1.5$, $7.3$] & $3.50$ [$2.1$, $9.4$] \\
       & HT & $4.36$ [$1.2$, $7.0$] & $5.89$ [$1.9$, $9.4$] \\
       & Acc.\ $z$ & $7.81$ [$4.4$, $14.4$] & $16.6$ [$9.7$, $34.6$] \\
 \bottomrule
