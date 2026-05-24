@@ -43,7 +43,7 @@ Simulation analysis (Appendix~\ref{app:local_dep}) confirms that the matched-dif
 
 \paragraph{Models and contamination.}
 We validate on three 7--8B model families: Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct, and Mistral-7B-Instruct-v0.3.
-Each is fine-tuned with QLoRA (rank\,$=$\,16, $\alpha$\,$=$\,32) under clean and contaminated conditions at varying levels: at $X\%$ contamination, $X\%$ of SFT training examples are benchmark items (questions paired with gold answers in the standard evaluation format), with the remainder drawn from a general instruction-following dataset.
+Each is fine-tuned with QLoRA (rank\,$=$\,16, $\alpha$\,$=$\,32; full hyperparameters in Appendix~\ref{app:hyperparams}) under clean and contaminated conditions at varying levels: at $X\%$ contamination, $X\%$ of SFT training examples are benchmark items (questions paired with gold answers in the standard evaluation format), with the remainder drawn from a general instruction-following dataset.
 All three families are tested at 15\% and 50\% contamination.
 Following initial observation of non-monotonic dose-response for Qwen, we added 5\% and 25\% conditions for Qwen to trace the full dose-response curve.
 The 25\% condition was subsequently extended to Llama to test whether the pattern generalizes; Mistral was not tested at 5\% or 25\% due to computational constraints.
@@ -61,4 +61,5 @@ This extension is $N{=}1$ (single model family, single contamination level).
 
 \paragraph{Contamination model.}
 QLoRA SFT on benchmark items serves as a controlled proxy for SFT-stage contamination, where benchmark data is explicitly included in fine-tuning mixtures---analogous to a test-taker with item preknowledge.
+We refer to the contaminated benchmark items as \emph{seen items} and the remaining benchmark items not included in training as \emph{unseen items}; this partition enables decomposition of person-fit statistics to assess whether the contamination signal concentrates on memorized items (\S\ref{sec:degradation}).
 Our findings are scoped to SFT-based contamination and may not generalize to pretraining contamination, which operates through different learning dynamics.

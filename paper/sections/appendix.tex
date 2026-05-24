@@ -313,6 +313,34 @@ This $N{=}1$ observation requires validation across model families, RL methods, 
   \label{fig:grpo}
 \end{figure}
 
+\paragraph{GRPO hyperparameters.}
+Table~\ref{tab:grpo_hyperparams} reports the GRPO training hyperparameters for the post-RL extension (\S\ref{sec:setup}).
+
+\begin{table}[t]
+\centering
+\caption{GRPO training hyperparameters (Qwen2.5-7B-Instruct, 15\% MMLU contamination).}
+\label{tab:grpo_hyperparams}
+\footnotesize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}ll@{}}
+\toprule
+Hyperparameter & Value \\
+\midrule
+Learning rate & $5 \times 10^{-6}$ \\
+Per-device batch size & 2 \\
+Gradient accumulation steps & 4 \\
+Num.\ generations per prompt & 16 \\
+Max completion length & 128 \\
+Sampling temperature & 1.2 \\
+Training steps & 1,500 (checkpoints at 500, 1000, 1500) \\
+Reward function & Correctness-based ($+1.0$ correct, $-1.0$ incorrect) \\
+LoRA rank / $\alpha$ / dropout & 16 / 32 / 0.05 \\
+Precision & BF16 \\
+Seed & 42 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 \section{QLoRA Training Hyperparameters}
 \label{app:hyperparams}
 
@@ -420,7 +448,7 @@ Contam.\ level & $s_1$ & $s_2$ & $s_3$ & Mean & SD \\
 
 \paragraph{Item selection seed robustness.}
 As a pipeline validation, we retrained Llama at 15\% and 50\% contamination using a different item selection seed (seed${=}42$ vs.\ the original seed${=}999$), which selects a distinct subset of MMLU items for contamination.
-The resulting $\ell_z^*$ values are effectively identical ($-2.992$ vs.\ $-2.992$ at 15\%; $-3.331$ vs.\ $-3.331$ at 50\%), confirming that $\ell_z^*$ is robust to which specific items are contaminated and depends primarily on the contamination proportion.
+The resulting $\ell_z^*$ values are numerically identical ($-2.992$ vs.\ $-2.992$ at 15\%; $-3.331$ vs.\ $-3.331$ at 50\%), confirming that $\ell_z^*$ is robust to which specific items are contaminated and depends primarily on the contamination proportion.
 
 \section{Use of AI Assistants}
 \label{app:ai-assistants}
