@@ -36,7 +36,7 @@ Despite the natural correspondence, no prior work has applied person-fit statist
 
 Rather than proposing $\ell_z^*$ as a ready-to-deploy detection tool, we characterize the behavior boundaries of IRT person-fit statistics for LLM contamination detection.
 Our framework operates at three layers: (i) pre-calibrated 4PL item parameters from the PSN-IRT item bank \citep{psnirt2026}, an external resource derived from 13,000+ models; (ii) binary response patterns obtained from the target model without access to weights or logits; and (iii) retrospective statistical inference requiring no model modification.
-Using controlled contamination experiments across three 7--8B model families (Qwen2.5-7B, Llama-3.1-8B, Mistral-7B; $n{=}10$ clean seeds each) with pre-calibrated 4PL item parameters from PSN-IRT \citep{psnirt2026}, we identify three IRT-specific findings on MMLU \citep{hendrycks2021mmlu} and ARC-Challenge:
+Using controlled contamination experiments across three 7--8B model families (Qwen2.5-7B, Llama-3.1-8B, Mistral-7B; $n{=}10$ clean seeds each) with PSN-IRT parameters, we identify three IRT-specific findings on MMLU \citep{hendrycks2021mmlu} and ARC-Challenge:
 
 \begin{enumerate}[leftmargin=*,nosep]
 \item \textbf{Model-specific $\theta$-shift dynamics.} Contamination inflates ability estimates ($\hat{\theta}$), absorbing the person-fit signal; $\theta$-anchoring amplifies Qwen's multi-seed $|d|$ by 2.4$\times$ at 50\% contamination while reducing inter-seed CV from 60\% to 19\%, establishing $\theta$-anchoring as a necessary condition for reliable detection of high-ability models at high contamination. ARC-C reverses through a ceiling effect.
