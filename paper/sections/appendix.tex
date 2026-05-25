@@ -137,6 +137,7 @@ We computed $\ell_z^*$ and accuracy $z$-scores for all 12 models $\times$ 5 benc
 Using the standard $|\ell_z^*| > 1.96$ threshold ($\alpha{=}0.05$, two-tailed), 57 of 60 cells are flagged as aberrant, indicating pervasive IRT assumption violations in production LLM responses.
 In contrast, accuracy $z$-scores ($|z| > 1.96$) flag only 4 of 60 cells.
 This stark asymmetry---95\% aberrance by $\ell_z^*$ versus 7\% by accuracy---motivates the $\Delta\ell_z^*$ matched-difference design (\S\ref{sec:did}), which sidesteps absolute thresholds by comparing each model against its own clean baseline.
+Figure~\ref{fig:leaderboard_heatmap} visualizes this pattern.
 
 \section{Item-Level Detection Results}
 \label{app:item_auroc}
@@ -306,13 +307,6 @@ GRPO erases the accuracy gap between seen and unseen items ($11.4\text{pp} \to 2
 Min-K\% membership inference confirms this dissociation: while SFT yields a weak MIA signal (AUC-ROC${=}0.611$), GRPO training drives AUC to $0.493$ (step~500), $0.493$ (step~1000), and $0.493$ (step~1500)---indistinguishable from random chance ($0.50$) as RL erases memorization-based features while the response-pattern anomaly that $\ell_z^*$ detects persists.
 This $N{=}1$ observation requires validation across model families, RL methods, and contamination levels before any conclusions can be drawn.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{fig_grpo.pdf}
-  \caption{Post-RL trajectory for Qwen contaminated at 15\% on MMLU. Left axis: accuracy on seen (solid) and unseen (dashed) items. Right axis: $\ell_z^*$ seen-unseen gap (green diamonds). GRPO erases the accuracy gap ($11.4\text{pp} \to 2.1\text{pp}$) while the response-pattern gap persists (${\sim}3.3$). $N{=}1$, single model and RL method; no statistical inference is drawn.}
-  \label{fig:grpo}
-\end{figure}
-
 \paragraph{GRPO hyperparameters.}
 Table~\ref{tab:grpo_hyperparams} reports the GRPO training hyperparameters for the post-RL extension (\S\ref{sec:setup}).
 
@@ -345,6 +339,8 @@ Seed & 42 \\
 \label{app:hyperparams}
 
 Table~\ref{tab:hyperparams} reports the QLoRA fine-tuning hyperparameters used across all experiments.
+All training was conducted on NVIDIA RTX PRO 6000 GPUs (48\,GB VRAM).
+Each QLoRA SFT run takes approximately 15--25 minutes depending on contamination level and dataset size; the full experimental campaign (including all seeds, contamination levels, and model families) consumed approximately 120 GPU-hours.
 
 \begin{table}[t]
 \centering
@@ -446,6 +442,24 @@ Contam.\ level & $s_1$ & $s_2$ & $s_3$ & Mean & SD \\
 \noindent\textit{Note.} Unlike Qwen, Llama exhibits no non-monotonic dose-response: mean $|d|$ is approximately flat across contamination levels ($2.30$--$2.80$), consistent with its near-zero baseline $\ell_z^*$ ($+0.26$) and negligible $\theta$-shift absorption (\S\ref{sec:theta_dynamics}). Cross-seed variance decreases with contamination level (CV: 39\% at 5\% $\to$ 13\% at 50\%), suggesting that higher contamination produces a more stable signal despite the flat mean trajectory.
 \end{table}
 
+\begin{table}[h]
+\centering
+\caption{Multi-seed Cohen's $d$ for Mistral-7B-v0.3 across contamination levels (MMLU). Each cell shows Cohen's $d$ from an independent training seed against the shared $n{=}10$ clean baseline ($\bar{\ell}_z^* = {+}4.02$, $s = 2.05$). The 5\% condition has only $n{=}2$ seeds; its high SD reflects this limited sample.}
+\label{tab:mistral_multiseed}
+\footnotesize
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{3}{c}{Per-seed $d$} & & \\
+\cmidrule(lr){2-4}
+Contam.\ level & $s_1$ & $s_2$ & $s_3$ & Mean & SD \\
+\midrule
+5\%  & $-$2.82 & $-$4.83 & --- & $-$3.83 & 1.42 \\
+15\% & $-$2.64 & $-$3.98 & $-$3.48 & $-$3.37 & 0.68 \\
+50\% & $-$3.50 & $-$4.25 & $-$4.51 & $-$4.09 & 0.53 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \paragraph{Item selection seed robustness.}
 As a pipeline validation, we retrained Llama at 15\% and 50\% contamination using a different item selection seed (seed${=}42$ vs.\ the original seed${=}999$), which selects a distinct subset of MMLU items for contamination.
 The resulting $\ell_z^*$ values are numerically identical ($-2.992$ vs.\ $-2.992$ at 15\%; $-3.331$ vs.\ $-3.331$ at 50\%), confirming that $\ell_z^*$ is robust to which specific items are contaminated and depends primarily on the contamination proportion.
@@ -453,13 +467,4 @@ The resulting $\ell_z^*$ values are numerically identical ($-2.992$ vs.\ $-2.992
 \section{Use of AI Assistants}
 \label{app:ai-assistants}
 
-We used Claude (Anthropic) as an AI coding and writing assistant
-throughout this work. Specifically:
-\begin{itemize}
-    \item \textbf{Code:} drafting experiment scripts, data-processing
-    pipelines, and analysis utilities; debugging and refactoring.
-    \item \textbf{Writing:} drafting and revising paper sections,
-    polishing prose, and reformatting LaTeX.
-    \item \textbf{Literature:} summarizing related papers to inform
-    related-work section.
-\end{itemize}
+The authors used AI-based writing assistants, including Claude, for limited support during manuscript preparation, including grammar polishing, wording suggestions, LaTeX editing, and code/debugging assistance. The tools were not used to generate the core research ideas, experimental design, methodological decisions, data analysis, or scientific conclusions. All AI-assisted text, code suggestions, and references were manually reviewed and edited by the authors.
