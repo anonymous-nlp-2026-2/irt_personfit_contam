@@ -29,21 +29,21 @@ data_5 = [
 ]
 # 15% contamination
 data_15 = [
-    (67.8, 6.57, 4.54, 15.19, 'Qwen', 'MMLU'),
-    (59.4,  2.11, 1.40,  4.80, 'Llama', 'MMLU'),
+    (67.8, 5.36, 4.26, 6.46, 'Qwen', 'MMLU'),
+    (59.4,  2.80, 2.20,  3.40, 'Llama', 'MMLU'),
     (52.4,  3.37, 2.69,  4.05, 'Mistral', 'MMLU'),
     (89.7,  3.16, 2.01,  9.54, 'Qwen\nARC-C', 'ARC-C'),
 ]
 # 25% contamination
 data_25 = [
-    (67.8, 8.22, 5.73, 18.88, 'Qwen', 'MMLU'),
-    (59.4,  1.99, 1.30,  4.40, 'Llama', 'MMLU'),
+    (67.8, 7.44, 5.58, 9.30, 'Qwen', 'MMLU'),
+    (59.4,  2.56, 2.04,  3.08, 'Llama', 'MMLU'),
 ]
 # 50% contamination
 data_50 = [
-    (67.8, 1.90, 1.04, 4.95, 'Qwen', 'MMLU'),
-    (59.4,  2.33, 1.60, 5.10, 'Llama', 'MMLU'),
-    (52.4,  3.50, 2.10, 9.40, 'Mistral', 'MMLU'),
+    (67.8, 5.08, 2.06, 8.10, 'Qwen', 'MMLU'),
+    (59.4,  2.30, 2.00, 2.60, 'Llama', 'MMLU'),
+    (52.4,  4.09, 3.56, 4.62, 'Mistral', 'MMLU'),
     (89.7,  5.30, 3.60, 15.20, 'Qwen\nARC-C', 'ARC-C'),
 ]
 
@@ -90,17 +90,17 @@ offsets = {
 }
 
 # Label Qwen (blue cluster)
-ax.annotate('Qwen', xy=(67.8, 8.22), xytext=(72, 8.5),
+ax.annotate('Qwen', xy=(67.8, 7.44), xytext=(72, 8.0),
             fontsize=8, color=C_QWEN, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_QWEN, lw=0.5, alpha=0.4))
 
 # Label Llama
-ax.annotate('Llama', xy=(59.4, 2.33), xytext=(61.5, 3.8),
+ax.annotate('Llama', xy=(59.4, 2.30), xytext=(61.5, 3.8),
             fontsize=8, color=C_LLAMA, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_LLAMA, lw=0.5, alpha=0.4))
 
 # Label Mistral
-ax.annotate('Mistral', xy=(52.4, 3.50), xytext=(46, 4.5),
+ax.annotate('Mistral', xy=(52.4, 4.09), xytext=(46, 5.0),
             fontsize=8, color=C_MISTRAL, fontweight='bold',
             arrowprops=dict(arrowstyle='-', color=C_MISTRAL, lw=0.5, alpha=0.4))
 
@@ -110,7 +110,7 @@ ax.annotate('Qwen\nARC-C', xy=(89.7, 5.30), xytext=(92, 6.2),
             arrowprops=dict(arrowstyle='-', color=C_ARCC, lw=0.5, alpha=0.4))
 
 # θ-shift absorption annotation (arrow from Qwen 25% down to 50%)
-ax.annotate('θ-shift\nabsorption', xy=(68.4, 1.90), xytext=(75, 1.3),
+ax.annotate('θ-shift\nabsorption', xy=(68.4, 5.08), xytext=(75, 3.8),
             fontsize=6.5, color='#555555', style='italic',
             arrowprops=dict(arrowstyle='->', color='#888888', lw=0.8))
 

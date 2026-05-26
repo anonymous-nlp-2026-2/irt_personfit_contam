@@ -31,15 +31,15 @@ columns = [
 ]
 
 d_vals = np.array([
-    [4.15, 6.57, 8.22, 1.90, 3.16, 5.30],
-    [np.nan, 2.11, 1.99, 2.33, np.nan, np.nan],
-    [np.nan, 3.37, np.nan, 3.50, np.nan, np.nan],
+    [4.15, 5.36, 7.44, 5.08, 3.16, 5.30],
+    [np.nan, 2.80, 2.56, 2.30, np.nan, np.nan],
+    [np.nan, 3.37, np.nan, 4.09, np.nan, np.nan],
 ])
 
 ci_text = [
-    ['[2.7, 9.9]', '[4.5, 15.2]', '[5.7, 18.9]', '[1.0, 5.0]', '[2.0, 9.5]', '[3.6, 15.2]'],
-    ['', '[1.4, 4.8]', '[1.3, 4.4]', '[1.6, 5.1]', '', ''],
-    ['', '(±0.68)', '', '[2.1, 9.4]', '', ''],
+    ['[2.7, 9.9]', '(±1.10)', '(±1.86)', '(±3.02)', '[2.0, 9.5]', '[3.6, 15.2]'],
+    ['', '(±0.60)', '(±0.52)', '(±0.30)', '', ''],
+    ['', '(±0.68)', '', '(±0.53)', '', ''],
 ]
 
 n_rows, n_cols = d_vals.shape
@@ -100,7 +100,7 @@ cbar.ax.tick_params(labelsize=7)
 
 # Footer
 ax.text(0.5, -0.32,
-        r'$n = 10$ seeds per model; 95% bootstrap CI (10,000 resamples). All CIs exclude zero.',
+        r'$n = 10$ clean seeds per model. Uncertainty: bootstrap 95% CI or $\pm$SD (multi-seed). All exclude zero.',
         transform=ax.transAxes, ha='center', fontsize=7.5,
         color='#666666', style='italic')
 

@@ -1,6 +1,6 @@
-# IRT Person-Fit Statistics for LLM Benchmark Contamination Detection
+# What Can IRT Person-Fit Statistics Reveal About SFT-Stage Benchmark Contamination?
 
-Code for the paper: "IRT Person-Fit Statistics for LLM Benchmark Contamination Detection" (EMNLP 2026 submission).
+Code for the paper: "What Can IRT Person-Fit Statistics Reveal About SFT-Stage Benchmark Contamination?" (EMNLP 2026 submission).
 
 ## Overview
 
